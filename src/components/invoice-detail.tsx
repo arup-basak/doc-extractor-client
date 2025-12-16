@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Loader2, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { Invoice } from '@/types/invoice';
+import type { Invoice, InvoiceItem } from '@/types/invoice';
 
 interface InvoiceDetailProps {
   invoice: Invoice;
@@ -71,11 +71,11 @@ export function InvoiceDetail({
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              productName: itemData.productName ?? item.ProductName,
-              productDescription: itemData.productDescription ?? item.ProductDescription,
-              quantity: itemData.quantity ?? item.Quantity,
-              unitPrice: itemData.unitPrice ?? item.UnitPrice,
-              lineTotal: itemData.lineTotal ?? item.LineTotal,
+              productName: itemData.ProductName ?? item.ProductName,
+              productDescription: itemData.ProductDescription ?? item.ProductDescription,
+              quantity: itemData.Quantity ?? item.Quantity,
+              unitPrice: itemData.UnitPrice ?? item.UnitPrice,
+              lineTotal: itemData.LineTotal ?? item.LineTotal,
             }),
           });
         }
@@ -214,9 +214,9 @@ export function InvoiceDetail({
                     <div className="space-y-2">
                       <Input
                         type="text"
-                        value={editedItem.productName ?? item.ProductName}
+                        value={editedItem.ProductName ?? item.ProductName}
                         onChange={(e) =>
-                          handleItemChange(item.SalesOrderDetailID, 'productName', e.target.value)
+                          handleItemChange(item.SalesOrderDetailID, 'ProductName', e.target.value)
                         }
                         placeholder="Product Name"
                         className="text-sm"
@@ -224,11 +224,11 @@ export function InvoiceDetail({
                       <div className="grid grid-cols-2 gap-2">
                         <Input
                           type="number"
-                          value={editedItem.quantity ?? item.Quantity}
+                          value={editedItem.Quantity ?? item.Quantity}
                           onChange={(e) =>
                             handleItemChange(
                               item.SalesOrderDetailID,
-                              'quantity',
+                              'Quantity',
                               Number(e.target.value)
                             )
                           }
@@ -238,11 +238,11 @@ export function InvoiceDetail({
                         <Input
                           type="number"
                           step="0.01"
-                          value={editedItem.unitPrice ?? item.UnitPrice}
+                          value={editedItem.UnitPrice ?? item.UnitPrice}
                           onChange={(e) =>
                             handleItemChange(
                               item.SalesOrderDetailID,
-                              'unitPrice',
+                              'UnitPrice',
                               Number(e.target.value)
                             )
                           }
